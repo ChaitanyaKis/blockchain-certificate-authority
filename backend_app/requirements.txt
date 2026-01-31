@@ -6,3 +6,4 @@ qrcode
 reportlab
 web3
 gunicorn
+cryptography
