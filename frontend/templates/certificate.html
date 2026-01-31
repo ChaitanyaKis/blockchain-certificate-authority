@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certificate of Authenticity</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="container certificate">
+    <div class="top-nav">
+    <a href="/dashboard" class="home-btn">🏠 Home</a>
+    </div>
+    <h1>🏆 Certificate of Authenticity</h1>
+
+    <p><b>Certificate Serial No:</b> {{ cert.serial_number }}</p>
+    <p><b>Certificate ID:</b> {{ cert.cert_id }}</p>
+    <p><b>Holder Name:</b> {{ cert.holder_name }}</p>
+    <p><b>Description:</b> {{ cert.description }}</p>
+    <p><b>Status:</b> {{ cert.status }}</p>
+    <p><b>Issued At:</b> {{ cert.issued_at }}</p>
+    <p><b>Issuer:</b> {{ issuer }}</p>
+
+    <br>
+
+    <img src="/qr/{{ cert.cert_id }}" width="160">
+
+    <p style="font-size:14px;">Scan QR to verify</p>
+
+    <div style="margin-top:20px;">
+        <input
+            type="text"
+            id="verifyLink"
+            value="{{ request.host_url }}public_verify/{{ cert.cert_id }}"
+            readonly
+            style="width:80%; padding:8px;"
+        >
+        <button onclick="copyLink()">Copy Verification Link</button>
+    </div>
+
+    <br>
+
+    <a href="/download/{{ cert.cert_id }}">
+        <button>⬇ Download Certificate PDF</button>
+    </a>
+
+    <div class="footer">
+        Cryptographically secured • Blockchain verified
+    </div>
+</div>
+
+<script>
+function copyLink() {
+    const input = document.getElementById("verifyLink");
+    input.select();
+    input.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(input.value);
+    alert("Verification link copied!");
+}
+</script>
+
+</body>
+</html>

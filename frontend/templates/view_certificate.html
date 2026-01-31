@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Certificate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="top-nav">
+    <a href="/dashboard" class="home-btn">🏠 Home</a>
+    </div>
+
+    <h1>🎓 View Certificate</h1>
+    <div class="subtitle">
+        Enter Certificate ID to view details
+    </div>
+
+    <form method="post">
+        <input
+            name="cert_id"
+            placeholder="Certificate ID (e.g. CERT-ABC123)"
+            required
+        >
+        <button type="submit">View Certificate</button>
+    </form>
+
+    {% if error %}
+        <div class="message invalid">{{ error }}</div>
+    {% endif %}
+
+    <div class="footer">
+        © 2026 Secure Certificate Authority
+    </div>
+</div>
+
+</body>
+</html>

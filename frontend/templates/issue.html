@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issue Certificate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 🔙 HOME BUTTON -->
+    <div class="top-nav">
+        <a href="/dashboard" class="home-btn">🏠 Home</a>
+    </div>
+
+    <h1>Issue Certificate</h1>
+
+    <form method="post">
+
+        <!-- ✅ HOLDER NAME -->
+        <input
+            name="holder_name"
+            placeholder="Certificate Holder Name"
+            required
+        >
+
+        <!-- ✅ DESCRIPTION -->
+        <textarea
+            name="cert_data"
+            placeholder="Certificate Description"
+            required
+        ></textarea>
+
+        <!-- ✅ ISSUER SECRET -->
+        <input
+            name="issuer_key"
+            placeholder="Issuer Secret"
+            required
+        >
+
+        <button type="submit">Issue Certificate</button>
+    </form>
+
+    <!-- STATUS MESSAGE -->
+    {% if message %}
+        <div class="message valid">{{ message }}</div>
+    {% endif %}
+
+    <!-- VIEW CERTIFICATE BUTTON -->
+    {% if issued_cert_id %}
+        <a href="/certificate/{{ issued_cert_id }}">
+            <button style="margin-top:15px;">🎓 View Certificate</button>
+        </a>
+    {% endif %}
+
+    <div class="footer">
+        © 2026 Secure Certificate Authority
+    </div>
+
+</div>
+
+</body>
+</html>

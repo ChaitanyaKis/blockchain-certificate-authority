@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Certificate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="top-nav">
+    <a href="/dashboard" class="home-btn">🏠 Home</a>
+    </div>
+
+    <h1>Verify Certificate</h1>
+
+    <form method="post">
+        <input name="cert_id" placeholder="Certificate ID" required>
+        <input name="holder_name" placeholder="Certificate Holder Name" required>
+        <textarea name="cert_data" placeholder="Certificate Description" required></textarea>
+        <button type="submit">Verify</button>
+    </form>
+
+    {% if result %}
+        <div class="message">{{ result }}</div>
+    {% endif %}
+
+    {% if result == "AUTHENTIC" and cert_id %}
+        <a href="/certificate/{{ cert_id }}">
+            <button style="margin-top:15px;">🎓 View Certificate</button>
+        </a>
+
+        <button onclick="copyLink('{{ cert_id }}')" style="margin-top:10px;">
+            🔗 Copy Verification Link
+        </button>
+    {% endif %}
+</div>
+
+<script>
+function copyLink(certId) {
+    const link = window.location.origin + "/public_verify/" + certId;
+    navigator.clipboard.writeText(link);
+    alert("Verification link copied!");
+}
+</script>
+
+</body>
+</html>

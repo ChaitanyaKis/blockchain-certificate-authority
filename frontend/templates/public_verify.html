@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Public Certificate Verification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="top-nav">
+    <a href="/dashboard" class="home-btn">🏠 Home</a>
+    </div>
+
+    <h1>Public Certificate Verification</h1>
+    <div class="subtitle">
+        This certificate can be verified without issuer access
+    </div>
+
+    {% if cert %}
+        <p><b>Certificate ID:</b> {{ cert.cert_id }}</p>
+        <p><b>Status:</b>
+            <span class="{{ 'valid' if cert.status == 'ACTIVE' else 'invalid' }}">
+                {{ cert.status }}
+            </span>
+        </p>
+        <p><b>Issued At:</b> {{ cert.issued_at }}</p>
+
+        {% if cert.status == "REVOKED" %}
+            <p class="invalid"><b>⚠️ This certificate has been revoked</b></p>
+        {% else %}
+            <p class="valid"><b>✔ This certificate is valid</b></p>
+        {% endif %}
+    {% else %}
+        <p class="invalid">Certificate not found</p>
+    {% endif %}
+
+    <div class="footer">
+        Cryptographically verifiable • No sensitive data exposed
+    </div>
+</div>
+
+</body>
+</html>

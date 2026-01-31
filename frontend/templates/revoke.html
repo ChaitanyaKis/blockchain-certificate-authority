@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Revoke Certificate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="top-nav">
+    <a href="/dashboard" class="home-btn">🏠 Home</a>
+    </div>
+
+    <h1>Revoke Certificate</h1>
+
+    <nav>
+        <a href="/">Dashboard</a>
+    </nav>
+
+    <form method="post">
+        <input name="cert_id" placeholder="Certificate ID" required>
+        <input name="issuer_key" placeholder="Issuer Secret" required>
+        <button type="submit" class="danger">Revoke Certificate</button>
+    </form>
+
+    {% if message %}
+        <div class="message invalid">{{ message }}</div>
+    {% endif %}
+
+    <div class="footer">
+        Revoked certificates remain verifiable
+    </div>
+</div>
+</body>
+</html>
